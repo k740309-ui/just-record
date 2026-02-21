@@ -45,11 +45,33 @@ const watchingScreen = allScreen
         )}
       </div>
       <div class="hero-visual">
+        <div class="floating-tag tag-1">🎧 Music</div>
+        <div class="floating-tag tag-2">☕ Coffee</div>
+        <div class="floating-tag tag-3">🎬 Cinema</div>
         <div class="shape">
           <div class="shape-glow"></div>
         </div>
       </div>
     </section>
+
+    <!-- Scrolling Ticker -->
+    <div class="ticker-wrap">
+      <div class="ticker">
+        <span class="ticker-item">RECORD YOUR LIFE</span><span class="ticker-separator">✦</span>
+        <span class="ticker-item">ANALYZE THE DATA</span><span class="ticker-separator">✦</span>
+        <span class="ticker-item">GROW EVERY DAY</span><span class="ticker-separator">✦</span>
+        <span class="ticker-item">TASTE & STAY</span><span class="ticker-separator">✦</span>
+        <span class="ticker-item">SCREEN LOG</span><span class="ticker-separator">✦</span>
+        <span class="ticker-item">DEEP THOUGHTS</span><span class="ticker-separator">✦</span>
+        <!-- Duplicate for seamless loop -->
+        <span class="ticker-item">RECORD YOUR LIFE</span><span class="ticker-separator">✦</span>
+        <span class="ticker-item">ANALYZE THE DATA</span><span class="ticker-separator">✦</span>
+        <span class="ticker-item">GROW EVERY DAY</span><span class="ticker-separator">✦</span>
+        <span class="ticker-item">TASTE & STAY</span><span class="ticker-separator">✦</span>
+        <span class="ticker-item">SCREEN LOG</span><span class="ticker-separator">✦</span>
+        <span class="ticker-item">DEEP THOUGHTS</span><span class="ticker-separator">✦</span>
+      </div>
+    </div>
 
     <!-- 3-Row Stacked Layout -->
     <div class="stacked-layout">
@@ -364,6 +386,74 @@ const watchingScreen = allScreen
     100% { border-radius: 40% 60% 70% 30% / 40% 40% 60% 50%; }
   }
 
+  /* --- Floating Tags --- */
+  .floating-tag {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,1);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--color-accent);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    z-index: 3;
+    pointer-events: none;
+    animation: float-tag 6s infinite ease-in-out alternate;
+  }
+
+  .tag-1 { top: 10%; left: -10%; animation-delay: 0s; transform: rotate(-5deg); }
+  .tag-2 { bottom: 15%; right: -5%; animation-delay: -2s; transform: rotate(3deg); }
+  .tag-3 { bottom: -5%; left: 10%; animation-delay: -4s; transform: rotate(-2deg); }
+
+  @keyframes float-tag {
+    0% { transform: translateY(0) rotate(-2deg); }
+    100% { transform: translateY(-20px) rotate(2deg); }
+  }
+
+  /* --- Scrolling Ticker --- */
+  .ticker-wrap {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    overflow: hidden;
+    background: #111; /* Dark contrasting band */
+    color: #fff;
+    padding: 1rem 0;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+    transform-origin: center;
+    transform: translateX(-50%) rotate(-1.5deg); /* Slight Dutch angle */
+    z-index: 5;
+  }
+
+  .ticker {
+    display: inline-flex;
+    white-space: nowrap;
+    animation: ticker-scroll 30s linear infinite;
+  }
+
+  .ticker-item {
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    padding: 0 1rem;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .ticker-separator {
+    color: var(--color-accent);
+    padding: 0 1rem;
+    font-size: 1.2rem;
+  }
+
+  @keyframes ticker-scroll {
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-50%, 0, 0); } /* -50% because we duplicated the items */
+  }
 
   /* --- Stacked Layout --- */
   .stacked-layout {
@@ -479,6 +569,18 @@ const watchingScreen = allScreen
     min-width: 0; /* Important for flex-child text truncation */
   }
 
+  /* Shine effect sweeping across the card on hover */
+  .feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -150%; width: 50%; height: 100%;
+    background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%);
+    transform: skewX(-20deg);
+    transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 10;
+    pointer-events: none;
+  }
+
   .feature-card:hover {
     transform: translateY(-10px) scale(1.02);
     box-shadow: 
@@ -486,6 +588,11 @@ const watchingScreen = allScreen
       0 0 0 2px rgba(16, 185, 129, 0.3),
       inset 0 0 0 1px rgba(255, 255, 255, 0.8);
     background: rgba(255, 255, 255, 0.85);
+  }
+
+  .feature-card:hover::before {
+    left: 200%;
+    transition-duration: 0.8s;
   }
 
   .card-bg {
