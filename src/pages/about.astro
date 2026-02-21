@@ -11,7 +11,7 @@ import Footer from '../components/Footer.astro';
     <div class="orb orb-3"></div>
   </div>
 
-  <main class="container">
+  <main class="about-container">
     <!-- Header Section -->
     <header class="about-header">
       <div class="about-header-content">
@@ -167,16 +167,18 @@ import Footer from '../components/Footer.astro';
   }
 
   /* --- Layout & Spacing --- */
-  main {
-    padding-top: var(--spacing-xxl);
+  .about-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: var(--spacing-xxl) var(--spacing-lg) 0 var(--spacing-lg);
     position: relative;
     z-index: 1;
   }
 
-  .stagger-1 { opacity: 0; animation: fadeInUp 0.8s forwards 0.2s; }
-  .stagger-2 { opacity: 0; animation: fadeInUp 0.8s forwards 0.4s; }
-  .stagger-3 { opacity: 0; animation: fadeInUp 0.8s forwards 0.6s; }
-  .stagger-4 { opacity: 0; animation: fadeInUp 0.8s forwards 0.8s; }
+  .stagger-1 { opacity: 0; animation: fadeInUp 0.8s ease forwards; animation-delay: 0.2s; }
+  .stagger-2 { opacity: 0; animation: fadeInUp 0.8s ease forwards; animation-delay: 0.4s; }
+  .stagger-3 { opacity: 0; animation: fadeInUp 0.8s ease forwards; animation-delay: 0.6s; }
+  .stagger-4 { opacity: 0; animation: fadeInUp 0.8s ease forwards; animation-delay: 0.8s; }
 
   .about-header {
     margin-top: var(--spacing-xxl);
@@ -189,7 +191,7 @@ import Footer from '../components/Footer.astro';
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--spacing-xxl);
+    gap: var(--spacing-xl); /* Reduced gap */
     max-width: 900px;
     margin: 0 auto;
   }
@@ -490,7 +492,8 @@ import Footer from '../components/Footer.astro';
     border-top: 2px dashed rgba(0,0,0,0.1);
     position: relative;
     z-index: 1;
-    animation: fadeInUp 1s forwards 0.8s;
+    animation: fadeInUp 1s ease forwards;
+    animation-delay: 0.8s;
   }
 
   blockquote {
