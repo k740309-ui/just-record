@@ -7,9 +7,15 @@ import Footer from '../components/Footer.astro';
   <main class="container">
     <!-- Header Section -->
     <header class="about-header">
-      <h1>데이터를 분석하듯 세상을 읽고,<br/><span class="highlight">전략을 짜듯 일상을 기록하는</span><br/>50대 게이머이자 기록가</h1>
+      <h1>1974년 서울에서 태어나,<br/><span class="highlight">차곡차곡 쌓아온 시간의 질감을 기록하는</span><br/>50대 기록가</h1>
+      <ul class="about-timeline">
+        <li><span>초등학교</span>대길초등학교</li>
+        <li><span>중학교</span>윤중중학교</li>
+        <li><span>고등학교</span>영신고등학교</li>
+        <li><span>대학교</span>아주대학교 경영학과</li>
+      </ul>
       <p class="about-intro">
-        나이는 단순한 숫자에 불과합니다. 넘치는 에너지와 호기심으로 매일 새로운 퀘스트를 수행하듯 일상을 즐깁니다.
+        나이는 단순한 숫자에 불과합니다. 지나온 시간만큼 깊어진 시선으로 매일 새로운 퀘스트를 수행하듯 일상을 즐깁니다.
       </p>
     </header>
 
@@ -87,7 +93,7 @@ import Footer from '../components/Footer.astro';
     <!-- Closing Quote -->
     <section class="closing">
       <blockquote>
-        "데이터를 보듯 꼼꼼하게,<br/>하지만 아이처럼 즐겁게 인생을 기록합니다."
+        "지나온 발자취를 소중히 여기며,<br/>오늘 하루도 아이처럼 즐겁게 기록합니다."
       </blockquote>
     </section>
   </main>
@@ -130,6 +136,38 @@ import Footer from '../components/Footer.astro';
     line-height: 1.8;
     max-width: 500px;
     margin: 0 auto;
+  }
+
+  .about-timeline {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto var(--spacing-xl) auto;
+    max-width: fit-content;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: rgba(255,255,255,0.5);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: var(--spacing-md) var(--spacing-lg);
+  }
+
+  .about-timeline li {
+    font-size: 1.05rem;
+    color: var(--color-text);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .about-timeline li span {
+    font-weight: 600;
+    color: var(--color-accent);
+    font-size: 0.9rem;
+    width: 60px;
+    display: inline-block;
   }
 
   h2 {
