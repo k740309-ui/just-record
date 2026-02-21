@@ -4,6 +4,13 @@ import Footer from '../components/Footer.astro';
 ---
 
 <Layout title="About | JUST RECORD">
+  <!-- Dynamic Background Orbs -->
+  <div class="bg-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
   <main class="container">
     <!-- Header Section -->
     <header class="about-header">
@@ -27,56 +34,66 @@ import Footer from '../components/Footer.astro';
     </header>
 
     <!-- My Favorites Section -->
-    <section class="favorites">
+    <section class="favorites stagger-3">
       <h2>My Favorites</h2>
-      <div class="favorites-grid">
+      <div class="favorites-grid bento-grid">
         
         <!-- Gaming (Civ 5) -->
-        <div class="favorite-card special hexagon-bg">
-          <div class="icon-wrapper hex-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-gamepad-2"><line x1="6" x2="10" y1="12" y2="12"/><line x1="8" x2="8" y1="10" y2="14"/><line x1="15" x2="15.01" y1="13" y2="13"/><line x1="18" x2="18.01" y1="11" y2="11"/><rect width="20" height="12" x="2" y="6" rx="2"/></svg>
+        <div class="favorite-card special hexagon-bg card-civ">
+          <div class="card-inner">
+            <div class="icon-wrapper hex-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-gamepad-2"><line x1="6" x2="10" y1="12" y2="12"/><line x1="8" x2="8" y1="10" y2="14"/><line x1="15" x2="15.01" y1="13" y2="13"/><line x1="18" x2="18.01" y1="11" y2="11"/><rect width="20" height="12" x="2" y="6" rx="2"/></svg>
+            </div>
+            <h3>나의 인생 게임: 문명 5</h3>
+            <p class="civ-quote">"한 턴만 더... 하던 열정으로 오늘 하루를 기록합니다."</p>
+            <p>
+              단순한 게임을 넘어선 거대한 서사. 제국을 이끌며 밤을 지새우던 그 전략적인 고민과 즐거움은 이제 제 삶과 기록의 원동력이 되었습니다.
+            </p>
           </div>
-          <h3>나의 인생 게임: 문명 5</h3>
-          <p class="civ-quote">"한 턴만 더... 하던 열정으로 오늘 하루를 기록합니다."</p>
-          <p>
-            단순한 게임을 넘어선 거대한 서사. 제국을 이끌며 밤을 지새우던 그 전략적인 고민과 즐거움은 이제 제 삶과 기록의 원동력이 되었습니다.
-          </p>
         </div>
 
         <!-- Travel -->
-        <div class="favorite-card">
-          <div class="icon-wrapper">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plane-takeoff"><path d="M2 22h20"/><path d="M6.36 17.4 4 17l-2-4 1.1-.55a2 2 0 0 1 1.8 0l.17.1a2 2 0 0 0 1.8 0L8 12l5-5 1.5-1.5a2.82 2.82 0 1 1 4 4L17 11l-3 6.1a2 2 0 0 1-1.8 1.1H6.36z"/></svg>
+        <div class="favorite-card card-travel pattern-dots">
+          <div class="card-inner">
+            <div class="icon-wrapper">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plane-takeoff"><path d="M2 22h20"/><path d="M6.36 17.4 4 17l-2-4 1.1-.55a2 2 0 0 1 1.8 0l.17.1a2 2 0 0 0 1.8 0L8 12l5-5 1.5-1.5a2.82 2.82 0 1 1 4 4L17 11l-3 6.1a2 2 0 0 1-1.8 1.1H6.36z"/></svg>
+            </div>
+            <h3>Travel</h3>
+            <p>새로운 맵을 탐험하듯, 낯선 곳에서의 예상치 못한 만남과 풍경을 즐깁니다.</p>
           </div>
-          <h3>Travel</h3>
-          <p>새로운 맵을 탐험하듯, 낯선 곳에서의 예상치 못한 만남과 풍경을 즐깁니다.</p>
         </div>
 
         <!-- Food -->
-        <div class="favorite-card">
-          <div class="icon-wrapper">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-utensils"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg>
+        <div class="favorite-card card-food pattern-waves">
+          <div class="card-inner">
+            <div class="icon-wrapper">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-utensils"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg>
+            </div>
+            <h3>Food</h3>
+            <p>맛있는 음식은 체력을 회복시켜주는 훌륭한 포션입니다. 좋은 사람들과 나누는 미식의 기쁨.</p>
           </div>
-          <h3>Food</h3>
-          <p>맛있는 음식은 체력을 회복시켜주는 훌륭한 포션입니다. 좋은 사람들과 나누는 미식의 기쁨.</p>
         </div>
 
         <!-- Movie -->
-        <div class="favorite-card">
-          <div class="icon-wrapper">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clapperboard"><path d="M20.2 6 3 11l-.9-2.4c-.3-1.1.3-2.2 1.3-2.5l13.5-4c1.1-.3 2.2.3 2.5 1.3Z"/><path d="m6.2 5.3 3.1 3.9"/><path d="m12.4 3.4 3.1 4"/><path d="M3 11h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg>
+        <div class="favorite-card card-movie pattern-lines">
+          <div class="card-inner">
+            <div class="icon-wrapper">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clapperboard"><path d="M20.2 6 3 11l-.9-2.4c-.3-1.1.3-2.2 1.3-2.5l13.5-4c1.1-.3 2.2.3 2.5 1.3Z"/><path d="m6.2 5.3 3.1 3.9"/><path d="m12.4 3.4 3.1 4"/><path d="M3 11h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg>
+            </div>
+            <h3>Movie</h3>
+            <p>잘 짜여진 스크립트와 영상미. 2시간 동안 즐기는 또 다른 세계로의 여행.</p>
           </div>
-          <h3>Movie</h3>
-          <p>잘 짜여진 스크립트와 영상미. 2시간 동안 즐기는 또 다른 세계로의 여행.</p>
         </div>
 
         <!-- Sports -->
-        <div class="favorite-card">
-          <div class="icon-wrapper">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-activity"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg>
+        <div class="favorite-card card-sports pattern-cross">
+          <div class="card-inner">
+            <div class="icon-wrapper">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-activity"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg>
+            </div>
+            <h3>Sports</h3>
+            <p>신체 나이란 숫자에 불과합니다. 건강한 체력은 모든 열정적인 퀘스트의 기본!</p>
           </div>
-          <h3>Sports</h3>
-          <p>신체 나이란 숫자에 불과합니다. 건강한 체력은 모든 열정적인 퀘스트의 기본!</p>
         </div>
 
       </div>
@@ -95,23 +112,84 @@ import Footer from '../components/Footer.astro';
 </Layout>
 
 <style>
+  /* --- Dynamic Background Orbs --- */
+  .bg-orbs {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -2;
+    overflow: hidden;
+    pointer-events: none;
+    background-color: #fafdfb;
+  }
+
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.5;
+    animation: float 20s infinite ease-in-out alternate;
+  }
+
+  .orb-1 {
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(5,150,105,0.1) 0%, rgba(5,150,105,0) 70%);
+    top: -10%;
+    left: -10%;
+  }
+
+  .orb-2 {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(16,185,129,0.08) 0%, rgba(16,185,129,0) 70%);
+    bottom: -10%;
+    right: -10%;
+    animation-delay: -5s;
+    animation-duration: 25s;
+  }
+
+  .orb-3 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(52,211,153,0.08) 0%, rgba(52,211,153,0) 70%);
+    top: 40%;
+    left: 30%;
+    animation-delay: -10s;
+    animation-duration: 30s;
+  }
+
+  @keyframes float {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(100px, 50px) scale(1.2); }
+  }
+
   /* --- Layout & Spacing --- */
   main {
     padding-top: var(--spacing-xxl);
+    position: relative;
+    z-index: 1;
   }
+
+  .stagger-1 { opacity: 0; animation: fadeInUp 0.8s forwards 0.2s; }
+  .stagger-2 { opacity: 0; animation: fadeInUp 0.8s forwards 0.4s; }
+  .stagger-3 { opacity: 0; animation: fadeInUp 0.8s forwards 0.6s; }
+  .stagger-4 { opacity: 0; animation: fadeInUp 0.8s forwards 0.8s; }
 
   .about-header {
     margin-top: var(--spacing-xxl);
     padding-bottom: var(--spacing-xxl);
-    border-bottom: 2px solid var(--color-border);
-    animation: fadeIn 0.8s ease forwards;
+    border-bottom: 2px dashed rgba(0,0,0,0.1);
+    animation: fadeInUp 0.8s ease forwards;
   }
 
   .about-header-content {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--spacing-xl);
+    gap: var(--spacing-xxl);
     max-width: 900px;
     margin: 0 auto;
   }
@@ -119,26 +197,30 @@ import Footer from '../components/Footer.astro';
   @media (min-width: 768px) {
     .about-header-content {
       flex-direction: row;
-      align-items: flex-start;
+      align-items: center;
       text-align: left;
     }
   }
 
   .profile-photo-wrapper {
     flex-shrink: 0;
-    width: 200px;
-    height: 250px;
+    width: 220px;
+    height: 280px;
     border-radius: 20px;
     overflow: hidden;
-    border: 3px solid var(--color-border);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    transform: rotate(-2deg);
-    transition: transform 0.3s ease, border-color 0.3s ease;
+    border: 4px solid #fff;
+    box-shadow: 
+      0 20px 40px rgba(0,0,0,0.1),
+      inset 0 0 0 1px rgba(0,0,0,0.05);
+    transform: rotate(-3deg);
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease;
   }
 
   .profile-photo-wrapper:hover {
-    transform: rotate(0deg) scale(1.02);
-    border-color: var(--color-accent);
+    transform: rotate(0deg) scale(1.05) translateY(-10px);
+    box-shadow: 
+      0 30px 50px rgba(5,150,105,0.15),
+      inset 0 0 0 1px rgba(5,150,105,0.2);
   }
 
   .profile-photo {
@@ -149,24 +231,30 @@ import Footer from '../components/Footer.astro';
 
   .about-text-content {
     flex-grow: 1;
+    position: relative;
   }
 
   h1 {
-    font-size: 2.5rem;
+    font-size: 2.8rem;
     font-weight: 300;
-    line-height: 1.4;
+    line-height: 1.3;
     letter-spacing: -0.04em;
     color: var(--color-text);
     margin-bottom: var(--spacing-lg);
   }
 
   h1 .highlight {
-    font-weight: 600;
-    color: var(--color-accent);
+    font-weight: 700;
+    color: transparent;
+    background: linear-gradient(90deg, var(--color-accent) 0%, #10b981 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    position: relative;
+    display: inline-block;
   }
 
   .about-intro {
-    font-size: 1.15rem;
+    font-size: 1.25rem;
     color: var(--color-text-muted);
     font-weight: 400;
     line-height: 1.8;
@@ -175,71 +263,123 @@ import Footer from '../components/Footer.astro';
   .about-timeline {
     list-style: none;
     padding: 0;
-    margin: 0 auto var(--spacing-xl) auto;
+    margin: 0 0 var(--spacing-xl) 0;
     max-width: fit-content;
     text-align: left;
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    background: rgba(255,255,255,0.5);
-    backdrop-filter: blur(8px);
-    border: 1px solid var(--color-border);
-    border-radius: 12px;
-    padding: var(--spacing-md) var(--spacing-lg);
+    gap: 12px;
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,1);
+    border-radius: 16px;
+    padding: var(--spacing-lg) var(--spacing-xl);
+    box-shadow: 0 10px 30px -10px rgba(0,0,0,0.05);
   }
 
   .about-timeline li {
-    font-size: 1.05rem;
+    font-size: 1.1rem;
     color: var(--color-text);
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 20px;
+    position: relative;
+  }
+
+  .about-timeline li::before {
+    content: '';
+    position: absolute;
+    left: -12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--color-accent);
+    opacity: 0.5;
   }
 
   .about-timeline li span {
-    font-weight: 600;
+    font-weight: 700;
     color: var(--color-accent);
     font-size: 0.9rem;
-    width: 60px;
+    width: 70px;
     display: inline-block;
+    letter-spacing: 0.05em;
   }
 
   h2 {
-    font-size: 1rem;
-    font-weight: 600;
+    font-size: 2rem;
+    font-weight: 700;
     color: var(--color-text);
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
+    letter-spacing: -0.02em;
     margin-bottom: var(--spacing-xl);
     text-align: center;
   }
 
-  /* --- Favorites Section --- */
+  /* --- Favorites Section (Bento Grid) --- */
   .favorites {
-    padding: var(--spacing-xxl) 0;
+    padding: var(--spacing-xxxl) 0;
   }
 
-  .favorites-grid {
+  .bento-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: minmax(180px, auto);
     gap: var(--spacing-lg);
   }
 
+  /* Bento specific spanning */
+  .card-civ { grid-column: span 2; grid-row: span 2; }
+  .card-travel { grid-column: span 1; grid-row: span 1; }
+  .card-food { grid-column: span 1; grid-row: span 1; }
+  .card-movie { grid-column: span 1; grid-row: span 2; }
+  .card-sports { grid-column: span 2; grid-row: span 1; }
+
   .favorite-card {
-    background-color: var(--color-bg);
-    border: 1px solid var(--color-border);
-    padding: var(--spacing-xl) var(--spacing-lg);
-    border-radius: 16px;
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.9);
+    border-radius: 24px;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .card-inner {
+    padding: var(--spacing-xl);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+    z-index: 2;
   }
 
   .favorite-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 24px -10px rgba(0,0,0,0.08);
-    border-color: var(--color-accent);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 
+      0 20px 40px -10px rgba(5,150,105,0.1),
+      0 0 0 2px rgba(16,185,129,0.2);
+    background: rgba(255, 255, 255, 0.9);
+  }
+
+  /* Shine effect sweeping across the card on hover */
+  .favorite-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -150%; width: 50%; height: 100%;
+    background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.7) 50%, rgba(255,255,255,0) 100%);
+    transform: skewX(-20deg);
+    transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 10;
+    pointer-events: none;
+  }
+
+  .favorite-card:hover::before {
+    left: 200%;
+    transition-duration: 0.8s;
   }
 
   /* Civ 5 Special Card */
@@ -263,7 +403,34 @@ import Footer from '../components/Footer.astro';
     background-size: 60px;
     opacity: 0.8;
     z-index: 0;
+  /* Dynamic Patterns for non-civ cards */
+  .pattern-dots::after, .pattern-waves::after, .pattern-lines::after, .pattern-cross::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    opacity: 0.15;
+    z-index: 0;
     pointer-events: none;
+    border-radius: 24px;
+  }
+  
+  .pattern-dots::after {
+    background-image: radial-gradient(rgba(5,150,105,1) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+
+  .pattern-waves::after {
+    background: repeating-radial-gradient(circle at 0 0, transparent 0, rgba(5,150,105,0.1) 10px, transparent 11px, transparent 20px);
+  }
+
+  .pattern-lines::after {
+    background: repeating-linear-gradient(45deg, rgba(5,150,105,0.1) 0, rgba(5,150,105,0.1) 2px, transparent 2px, transparent 10px);
+  }
+
+  .pattern-cross::after {
+    background-image: radial-gradient(rgba(5,150,105,1) 1px, transparent 1px), radial-gradient(rgba(5,150,105,1) 1px, transparent 1px);
+    background-size: 40px 40px;
+    background-position: 0 0, 20px 20px;
   }
 
   .favorite-card.special > * {
@@ -318,14 +485,17 @@ import Footer from '../components/Footer.astro';
 
   /* --- Closing Quote --- */
   .closing {
-    padding: var(--spacing-xl) 0 var(--spacing-xxl) 0;
+    padding: var(--spacing-xxl) 0 var(--spacing-xxxl) 0;
     text-align: center;
-    border-top: 2px solid var(--color-border);
+    border-top: 2px dashed rgba(0,0,0,0.1);
+    position: relative;
+    z-index: 1;
+    animation: fadeInUp 1s forwards 0.8s;
   }
 
   blockquote {
-    font-size: 1.4rem;
-    font-weight: 500;
+    font-size: 1.8rem;
+    font-weight: 300;
     line-height: 1.6;
     color: var(--color-accent);
     font-style: italic;
@@ -333,23 +503,39 @@ import Footer from '../components/Footer.astro';
     word-break: keep-all;
   }
 
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(15px); }
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
     to { opacity: 1; transform: translateY(0); }
   }
 
+  @media (max-width: 900px) {
+    .bento-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .card-movie { grid-column: span 1; grid-row: span 1; }
+    .card-sports { grid-column: span 2; grid-row: span 1; }
+  }
+
   @media (max-width: 640px) {
-    .favorites-grid {
+    .bento-grid {
       grid-template-columns: 1fr;
     }
-    .favorite-card.special {
-      grid-column: auto;
+    .card-civ, .card-travel, .card-food, .card-movie, .card-sports {
+      grid-column: 1 / -1;
+      grid-row: auto;
+    }
+    .profile-photo-wrapper {
+      margin-bottom: var(--spacing-lg);
+    }
+    .about-timeline {
+      margin: 0 auto var(--spacing-lg) auto;
     }
     h1 {
-      font-size: 2rem;
+      font-size: 2.2rem;
+      text-align: center;
     }
     blockquote {
-      font-size: 1.15rem;
+      font-size: 1.3rem;
     }
   }
 </style>
