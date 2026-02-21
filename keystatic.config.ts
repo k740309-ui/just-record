@@ -1,14 +1,14 @@
 import { config, fields, collection } from '@keystatic/core';
 
-// DEV 환경인지 확인 (Astro 빌드 시 production으로 인식됨)
-const isDev = process.env.NODE_ENV === 'development';
+// Use Vite's static environment variable to guarantee PROD vs DEV behavior
+const isProd = import.meta.env.PROD;
 
 export default config({
-    storage: isDev ? {
-        kind: 'local',
-    } : {
+    storage: isProd ? {
         kind: 'github',
         repo: 'k740309-ui/just-record',
+    } : {
+        kind: 'local',
     },
     ui: {
         brand: {
