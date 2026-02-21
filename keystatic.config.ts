@@ -1,8 +1,14 @@
 import { config, fields, collection } from '@keystatic/core';
 
+// DEV 환경인지 확인 (Astro 빌드 시 production으로 인식됨)
+const isDev = process.env.NODE_ENV === 'development';
+
 export default config({
-    storage: {
+    storage: isDev ? {
         kind: 'local',
+    } : {
+        kind: 'github',
+        repo: 'k740309-ui/just-record',
     },
     ui: {
         brand: {
