@@ -1,0 +1,334 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="About | JUST RECORD">
+  <main class="container">
+    <!-- Header Section -->
+    <header class="about-header">
+      <h1>데이터를 분석하듯 세상을 읽고,<br/><span class="highlight">전략을 짜듯 일상을 기록하는</span><br/>50대 게이머이자 기록가</h1>
+      <p class="about-intro">
+        나이는 단순한 숫자에 불과합니다. 넘치는 에너지와 호기심으로 매일 새로운 퀘스트를 수행하듯 일상을 즐깁니다.
+      </p>
+    </header>
+
+    <!-- My Favorites Section -->
+    <section class="favorites">
+      <h2>My Favorites</h2>
+      <div class="favorites-grid">
+        
+        <!-- Gaming (Civ 5) -->
+        <div class="favorite-card special hexagon-bg">
+          <div class="icon-wrapper hex-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-gamepad-2"><line x1="6" x2="10" y1="12" y2="12"/><line x1="8" x2="8" y1="10" y2="14"/><line x1="15" x2="15.01" y1="13" y2="13"/><line x1="18" x2="18.01" y1="11" y2="11"/><rect width="20" height="12" x="2" y="6" rx="2"/></svg>
+          </div>
+          <h3>나의 인생 게임: 문명 5</h3>
+          <p class="civ-quote">"한 턴만 더... 하던 열정으로 오늘 하루를 기록합니다."</p>
+          <p>
+            단순한 게임을 넘어선 거대한 서사. 제국을 이끌며 밤을 지새우던 그 전략적인 고민과 즐거움은 이제 제 삶과 기록의 원동력이 되었습니다.
+          </p>
+        </div>
+
+        <!-- Travel -->
+        <div class="favorite-card">
+          <div class="icon-wrapper">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plane-takeoff"><path d="M2 22h20"/><path d="M6.36 17.4 4 17l-2-4 1.1-.55a2 2 0 0 1 1.8 0l.17.1a2 2 0 0 0 1.8 0L8 12l5-5 1.5-1.5a2.82 2.82 0 1 1 4 4L17 11l-3 6.1a2 2 0 0 1-1.8 1.1H6.36z"/></svg>
+          </div>
+          <h3>Travel</h3>
+          <p>새로운 맵을 탐험하듯, 낯선 곳에서의 예상치 못한 만남과 풍경을 즐깁니다.</p>
+        </div>
+
+        <!-- Food -->
+        <div class="favorite-card">
+          <div class="icon-wrapper">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-utensils"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg>
+          </div>
+          <h3>Food</h3>
+          <p>맛있는 음식은 체력을 회복시켜주는 훌륭한 포션입니다. 좋은 사람들과 나누는 미식의 기쁨.</p>
+        </div>
+
+        <!-- Movie -->
+        <div class="favorite-card">
+          <div class="icon-wrapper">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clapperboard"><path d="M20.2 6 3 11l-.9-2.4c-.3-1.1.3-2.2 1.3-2.5l13.5-4c1.1-.3 2.2.3 2.5 1.3Z"/><path d="m6.2 5.3 3.1 3.9"/><path d="m12.4 3.4 3.1 4"/><path d="M3 11h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg>
+          </div>
+          <h3>Movie</h3>
+          <p>잘 짜여진 스크립트와 영상미. 2시간 동안 즐기는 또 다른 세계로의 여행.</p>
+        </div>
+
+        <!-- Sports -->
+        <div class="favorite-card">
+          <div class="icon-wrapper">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-activity"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg>
+          </div>
+          <h3>Sports</h3>
+          <p>신체 나이란 숫자에 불과합니다. 건강한 체력은 모든 열정적인 퀘스트의 기본!</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Life Gallery (Photo Placeholders) -->
+    <section class="gallery">
+      <h2>나의 순간들</h2>
+      <div class="gallery-grid">
+        <div class="photo-placeholder">
+          <span class="placeholder-text">Next Destination</span>
+        </div>
+        <div class="photo-placeholder">
+          <span class="placeholder-text">Best Meal</span>
+        </div>
+        <div class="photo-placeholder">
+          <span class="placeholder-text">Movie of the Month</span>
+        </div>
+        <div class="photo-placeholder">
+          <span class="placeholder-text">Active Life</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Closing Quote -->
+    <section class="closing">
+      <blockquote>
+        "데이터를 보듯 꼼꼼하게,<br/>하지만 아이처럼 즐겁게 인생을 기록합니다."
+      </blockquote>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  /* --- Layout & Spacing --- */
+  main {
+    padding-top: var(--spacing-xxl);
+  }
+
+  .about-header {
+    margin-top: var(--spacing-xxl);
+    padding-bottom: var(--spacing-xl);
+    border-bottom: 2px solid var(--color-border);
+    animation: fadeIn 0.8s ease forwards;
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 300;
+    line-height: 1.4;
+    letter-spacing: -0.04em;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-lg);
+  }
+
+  h1 .highlight {
+    font-weight: 600;
+    color: var(--color-accent);
+  }
+
+  .about-intro {
+    font-size: 1.15rem;
+    color: var(--color-text-muted);
+    font-weight: 400;
+    line-height: 1.8;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  h2 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: var(--spacing-xl);
+    text-align: center;
+  }
+
+  /* --- Favorites Section --- */
+  .favorites {
+    padding: var(--spacing-xxl) 0;
+  }
+
+  .favorites-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-lg);
+  }
+
+  .favorite-card {
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border);
+    padding: var(--spacing-xl) var(--spacing-lg);
+    border-radius: 16px;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .favorite-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px -10px rgba(0,0,0,0.08);
+    border-color: var(--color-accent);
+  }
+
+  /* Civ 5 Special Card */
+  .favorite-card.special {
+    grid-column: 1 / -1; /* Spans full width */
+    background: linear-gradient(145deg, var(--color-bg) 0%, var(--color-accent-light) 100%);
+    border-color: var(--color-accent-light);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Hexagon background pattern for Civ 5 */
+  .hexagon-bg::after {
+    content: '';
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    width: 150px;
+    height: 150px;
+    background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 0l17.32 10v20L20 40 2.68 30V10z' fill='none' stroke='%23059669' stroke-width='1' stroke-opacity='0.15'/%3E%3C/svg%3E");
+    background-size: 60px;
+    opacity: 0.8;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .favorite-card.special > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Hexagon Icon Wrapper */
+  .icon-wrapper {
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    background-color: var(--color-accent-light);
+    color: var(--color-accent-hover);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hex-icon {
+    border-radius: 0;
+    width: 56px;
+    height: 64px;
+    background-color: var(--color-accent);
+    color: white;
+    /* pure CSS hexagon */
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  }
+
+  .favorite-card h3 {
+    font-size: 1.35rem;
+    font-weight: 600;
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-text);
+  }
+
+  .civ-quote {
+    font-size: 1.15rem !important;
+    font-weight: 500;
+    color: var(--color-accent-hover) !important;
+    margin-bottom: var(--spacing-sm) !important;
+    font-style: italic;
+  }
+
+  .favorite-card p {
+    font-size: 1.05rem;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+    word-break: keep-all;
+  }
+
+  /* --- Gallery Section --- */
+  .gallery {
+    padding: var(--spacing-xxl) 0;
+    border-top: 1px dashed var(--color-border);
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-lg);
+  }
+
+  .photo-placeholder {
+    aspect-ratio: 4 / 3;
+    background-color: var(--color-bg);
+    border: 2px solid var(--color-border);
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: var(--spacing-md);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  /* Bright active styling on hover */
+  .photo-placeholder:hover {
+    border-color: var(--color-accent);
+    background-color: var(--color-accent-light);
+    transform: scale(1.02);
+  }
+
+  .placeholder-text {
+    font-size: 1.1rem;
+    color: var(--color-text-muted);
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    transition: color 0.3s ease;
+  }
+
+  .photo-placeholder:hover .placeholder-text {
+    color: var(--color-accent-hover);
+  }
+
+  /* --- Closing Quote --- */
+  .closing {
+    padding: var(--spacing-xl) 0 var(--spacing-xxl) 0;
+    text-align: center;
+    border-top: 2px solid var(--color-border);
+  }
+
+  blockquote {
+    font-size: 1.4rem;
+    font-weight: 500;
+    line-height: 1.6;
+    color: var(--color-accent);
+    font-style: italic;
+    letter-spacing: -0.02em;
+    word-break: keep-all;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 640px) {
+    .favorites-grid, .gallery-grid {
+      grid-template-columns: 1fr;
+    }
+    .favorite-card.special {
+      grid-column: auto;
+    }
+    h1 {
+      font-size: 2rem;
+    }
+    blockquote {
+      font-size: 1.15rem;
+    }
+  }
+</style>

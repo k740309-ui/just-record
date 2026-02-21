@@ -1,0 +1,49 @@
+---
+import '../styles/global.css';
+
+import Navigation from '../components/Navigation.astro';
+
+interface Props {
+	title: string;
+	description?: string;
+}
+
+const { title, description = "A minimalist personal website" } = Astro.props;
+---
+
+<!doctype html>
+<html lang="ko">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content={description} />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+	</head>
+	<body>
+		<div class="page-transition-bar"></div>
+		<Navigation />
+		<slot />
+	</body>
+</html>
+
+<style>
+	.page-transition-bar {
+		position: fixed;
+		top: 0;
+		left: 0;
+		height: 3px;
+		background: linear-gradient(90deg, var(--color-accent-light) 0%, var(--color-accent) 100%);
+		z-index: 9999;
+		pointer-events: none;
+		animation: loadingBar 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+		box-shadow: 0 0 10px rgba(5, 150, 105, 0.4);
+	}
+
+	@keyframes loadingBar {
+		0% { width: 0; opacity: 1; }
+		80% { width: 100%; opacity: 1; }
+		100% { width: 100%; opacity: 0; }
+	}
+</style>

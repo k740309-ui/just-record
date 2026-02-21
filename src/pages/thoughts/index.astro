@@ -1,0 +1,239 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Footer from '../../components/Footer.astro';
+
+const allThoughts = await getCollection('thoughts');
+const sortedThoughts = allThoughts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<Layout title="THOUGHTS | JUST RECORD">
+  <main class="container">
+    <header class="logs-header">
+      <h1>THOUGHTS</h1>
+      <p class="logs-intro">
+        단상. 일상의 순간들에 떠오른 생각의 파편들을 기록합니다.
+      </p>
+    </header>
+
+    <section class="logs-list-section">
+      <div class="logs-list">
+        {sortedThoughts.map(entry => (
+          <article class="log-item">
+            <a href={`/thoughts/${entry.slug}`} class="log-link">
+              <div class="log-meta">
+                <time datetime={entry.data.date.toISOString()}>
+                  {entry.data.date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\.$/, '')}
+                </time>
+              </div>
+              <div class="log-content">
+                <h2 class="log-title">{entry.data.title}</h2>
+                <p class="log-desc">{entry.data.description}</p>
+                {entry.data.tags && entry.data.tags.length > 0 && (
+                  <div class="log-tags">
+                    {entry.data.tags.map(tag => (
+                      <span class="tag">#{tag}</span>
+                    ))}
+                  </div>
+                )}
+              </div>
+              <div class="read-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </div>
+            </a>
+          </article>
+        ))}
+        {sortedThoughts.length === 0 && <p class="empty">아직 작성된 기록이 없습니다.</p>}
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  main {
+    padding-top: var(--spacing-xxl);
+  }
+
+  .logs-header {
+    margin-top: var(--spacing-xl);
+    padding-bottom: var(--spacing-xl);
+    border-bottom: 2px solid var(--color-border);
+    animation: fadeIn 0.8s ease forwards;
+  }
+
+  h1 {
+    font-size: 3rem;
+    font-weight: 300;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .logs-intro {
+    font-size: 1.15rem;
+    color: var(--color-text-muted);
+    font-weight: 300;
+  }
+
+  .logs-list-section {
+    padding: var(--spacing-xl) 0 var(--spacing-xxl) 0;
+  }
+
+  .logs-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+  }
+
+  .log-item {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(5, 150, 105, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+    border-radius: 12px;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .log-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 3px;
+    background-color: var(--color-accent);
+    transform: scaleY(0);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transform-origin: bottom;
+  }
+
+  .log-item:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(5, 150, 105, 0.08);
+    border-color: rgba(5, 150, 105, 0.3);
+    background: rgba(255, 255, 255, 0.85);
+  }
+
+  .log-item:hover::before {
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+
+  .log-link {
+    display: flex;
+    padding: var(--spacing-xl);
+    border-bottom: none;
+    align-items: center;
+    gap: var(--spacing-lg);
+  }
+
+  .log-meta {
+    flex-shrink: 0;
+    width: 120px;
+    font-size: 0.95rem;
+    color: var(--color-accent);
+    font-weight: 500;
+  }
+
+  .log-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+
+  .log-title {
+    font-size: 1.35rem;
+    font-weight: 500;
+    color: var(--color-text);
+    margin: 0;
+    line-height: 1.4;
+    transition: color 0.2s ease;
+  }
+
+  .log-tags {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-sm);
+  }
+
+  .tag {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border);
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    transition: all 0.2s ease;
+  }
+
+  .log-item:hover .tag {
+    border-color: var(--color-accent-light);
+    color: var(--color-accent);
+  }
+
+  .log-desc {
+    font-size: 1.05rem;
+    color: var(--color-text-muted);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .read-icon {
+    color: var(--color-border);
+    transition: all 0.3s ease;
+    transform: translateX(-10px);
+    opacity: 0;
+  }
+
+  .log-item:hover .read-icon {
+    color: var(--color-accent);
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  .empty {
+    color: var(--color-text-muted);
+    padding: var(--spacing-lg) 0;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 768px) {
+    .log-link {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--spacing-md);
+      padding: var(--spacing-lg);
+    }
+    .log-meta {
+      width: auto;
+    }
+    .read-icon {
+      display: none;
+    }
+    .log-item:hover {
+      transform: translateY(-4px);
+    }
+    .log-item::before {
+      top: 0;
+      left: 0;
+      height: 4px;
+      width: 100%;
+      transform: scaleX(0);
+      transform-origin: left;
+    }
+    .log-item:hover::before {
+      transform: scaleX(1);
+    }
+  }
+</style>

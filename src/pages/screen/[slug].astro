@@ -1,0 +1,200 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Footer from '../../components/Footer.astro';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('screen');
+  return entries.map(entry => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<Layout title={`${entry.data.title} - SCREEN`} description={entry.data.description}>
+  <main class="container">
+    <article class="post">
+      <header class="post-header">
+        <a href="/screen" class="back-link">&larr; Screen List</a>
+        <h1 class="title">{entry.data.title}</h1>
+        <div class="meta">
+          <time datetime={entry.data.date.toISOString()}>
+            {entry.data.date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' })}
+          </time>
+          {entry.data.genre && <span class="divider">|</span>}
+          {entry.data.genre && <span>{entry.data.genre}</span>}
+          {entry.data.rating && <span class="divider">|</span>}
+          {entry.data.rating && <span class="rating">★ {entry.data.rating}</span>}
+        </div>
+      </header>
+      
+      <div class="content">
+        <Content />
+      </div>
+    </article>
+  </main>
+  
+  <Footer />
+</Layout>
+
+<style>
+  .post {
+    padding-top: var(--spacing-xxl);
+    padding-bottom: var(--spacing-xl);
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    margin-bottom: var(--spacing-xxl);
+    border-bottom: none;
+    transition: color 0.2s ease, transform 0.2s ease;
+  }
+
+  .back-link:hover {
+    color: var(--color-accent);
+    transform: translateX(-4px);
+  }
+
+  .post-header {
+    margin-bottom: var(--spacing-xxl);
+    text-align: center;
+  }
+
+  .title {
+    font-size: 2.75rem;
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.03em;
+    margin-bottom: var(--spacing-md);
+    color: var(--color-text);
+  }
+
+  .meta {
+    font-size: 1.05rem;
+    color: var(--color-text-muted);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .meta time {
+    font-weight: 500;
+    color: var(--color-accent);
+  }
+  
+  .divider {
+    color: var(--color-border);
+  }
+  
+  .rating {
+    color: var(--color-accent-hover);
+    font-weight: 600;
+  }
+
+  .content {
+    font-size: 1.15rem;
+    line-height: 1.85;
+    color: var(--color-text);
+    word-break: keep-all;
+  }
+
+  .content :global(h2) {
+    font-size: 1.85rem;
+    font-weight: 600;
+    margin-top: 3rem;
+    margin-bottom: 1.25rem;
+    color: var(--color-text);
+    position: relative;
+    padding-left: 14px;
+  }
+
+  .content :global(h2)::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10%;
+    height: 80%;
+    width: 4px;
+    background-color: var(--color-accent);
+    border-radius: 2px;
+  }
+
+  .content :global(h3) {
+    font-size: 1.4rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: var(--color-text);
+    font-weight: 500;
+  }
+
+  .content :global(p) {
+    margin-bottom: 1.5rem;
+    color: #444; 
+  }
+
+  .content :global(strong) {
+    color: var(--color-text);
+    font-weight: 600;
+    background: linear-gradient(transparent 60%, var(--color-accent-light) 60%);
+    padding: 0 2px;
+  }
+
+  .content :global(ul), .content :global(ol) {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+    color: #444;
+  }
+
+  .content :global(li) {
+    margin-bottom: 0.5rem;
+  }
+  
+  .content :global(li)::marker {
+    color: var(--color-accent);
+  }
+
+  .content :global(img) {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin: 2rem 0;
+    border: 1px solid var(--color-border);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  }
+
+  .content :global(img + em) {
+    display: block;
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    margin-top: -1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .content :global(blockquote) {
+    border-left: 4px solid var(--color-accent);
+    background-color: var(--color-accent-light);
+    border-radius: 0 8px 8px 0;
+    padding: 1rem 1.5rem;
+    color: var(--color-text);
+    margin: 2rem 0;
+    font-style: italic;
+    font-weight: 500;
+  }
+
+  .content :global(blockquote p:last-child) {
+    margin-bottom: 0;
+  }
+</style>

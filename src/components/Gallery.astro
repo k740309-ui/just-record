@@ -1,0 +1,139 @@
+---
+export interface Props {
+  images: string[];
+}
+
+const { images } = Astro.props;
+
+const imagePaths = images.map(img => img.startsWith('/') ? img : `/images/${img}`);
+---
+
+<div class="gallery-wrapper">
+  {imagePaths.map((path, index) => (
+    <div class="gallery-item">
+      <img src={path} alt={`Gallery image ${index + 1}`} class="gallery-img" data-full-img={path} />
+    </div>
+  ))}
+</div>
+
+<div id="fullscreen-overlay" class="fullscreen-overlay hidden">
+  <button id="close-btn" class="close-btn">&times;</button>
+  <img id="fullscreen-img" class="fullscreen-img" src="" alt="Fullscreen image" />
+</div>
+
+<script>
+  // Simple Fullscreen Image Viewer logic
+  const overlay = document.getElementById('fullscreen-overlay');
+  const overlayImg = document.getElementById('fullscreen-img');
+  const closeBtn = document.getElementById('close-btn');
+  const galleryImgs = document.querySelectorAll('.gallery-img');
+
+  galleryImgs.forEach(img => {
+    img.addEventListener('click', (e) => {
+      const src = (e.target as HTMLImageElement).getAttribute('data-full-img');
+      if(src && overlayImg && overlay) {
+        overlayImg.setAttribute('src', src);
+        overlay.classList.remove('hidden');
+        document.body.style.overflow = 'hidden'; // Prevent scrolling
+      }
+    });
+  });
+
+  const closeOverlay = () => {
+    if(overlay) {
+      overlay.classList.add('hidden');
+      document.body.style.overflow = 'auto'; // Restore scrolling
+    }
+  };
+
+  if(closeBtn) closeBtn.addEventListener('click', closeOverlay);
+  if(overlay) overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) closeOverlay();
+  });
+  
+  // Close on Escape key
+  document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape') closeOverlay();
+  });
+</script>
+
+<style>
+  .gallery-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-sm);
+    margin: 2.5rem 0;
+  }
+
+  .gallery-item {
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+    cursor: zoom-in;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .gallery-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border-color: var(--color-accent-light);
+  }
+
+  .gallery-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    margin: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+
+  .fullscreen-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.9);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+
+  .fullscreen-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .fullscreen-img {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 4px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 3rem;
+    cursor: pointer;
+    line-height: 1;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+
+  .close-btn:hover {
+    opacity: 1;
+    color: var(--color-accent-light);
+  }
+</style>

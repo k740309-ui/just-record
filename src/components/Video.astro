@@ -1,0 +1,47 @@
+---
+export interface Props {
+  src: string;
+  autoplay?: boolean;
+  loop?: boolean;
+}
+
+const { src, autoplay = false, loop = false } = Astro.props;
+
+// Helper to allow user to pass just the filename
+// E.g., src="my-video.mp4" => "/images/my-video.mp4"
+const videoPath = src.startsWith('/') ? src : `/images/${src}`;
+---
+
+<div class="video-wrapper">
+  <video 
+    controls
+    autoplay={autoplay}
+    loop={loop}
+    muted={autoplay ? true : false}
+    playsinline
+    class="essay-video"
+  >
+    <source src={videoPath} type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+</div>
+
+<style>
+  .video-wrapper {
+    margin: 2.5rem 0;
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    border: 1px solid var(--color-border);
+    background-color: var(--color-bg);
+  }
+
+  .essay-video {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+  }
+</style>

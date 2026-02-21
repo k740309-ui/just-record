@@ -1,0 +1,734 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import Footer from '../components/Footer.astro';
+
+// Fetch data from new collections
+const allTaste = await getCollection('taste');
+const allScreen = await getCollection('screen');
+const allThoughts = await getCollection('thoughts');
+
+// Sort and get latest entries
+const latestTaste = allTaste.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0, 2);
+const latestScreen = allScreen.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0, 2);
+const latestThoughts = allThoughts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0, 4);
+
+// Find 'Currently Watching' from screen
+const watchingScreen = allScreen
+  .filter(entry => entry.data.status === 'watching')
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())[0];
+---
+
+<Layout title="JUST RECORD">
+  <!-- Dynamic Background Orbs -->
+  <div class="bg-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <main class="container">
+    <!-- Main Slogan Section -->
+    <section class="hero">
+      <div class="hero-content">
+        <h1 class="slogan">나를 기록하고<br/>분석하며<br/><span class="highlight">성장하는 즐거움</span></h1>
+        <p class="intro-text">
+          매일의 맛, 뇌리를 스치는 스크린의 잔상, 그리고 묵직한 단상들을 체계적으로 데이터화하는 개인 공간입니다.
+        </p>
+        
+        {watchingScreen && (
+          <a href={`/screen/${watchingScreen.slug}`} class="watching-badge">
+            <span class="watching-indicator"></span>
+            <span class="watching-label">지금 보고 있는 콘텐츠:</span>
+            <strong class="watching-title">{watchingScreen.data.title}</strong>
+          </a>
+        )}
+      </div>
+      <div class="hero-visual">
+        <div class="shape">
+          <div class="shape-glow"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dashboard Layout -->
+    <div class="dashboard-grid">
+      
+      <!-- Main Content Column (Taste & Screen) -->
+      <div class="main-column">
+        
+        <!-- Latest Taste & Stay -->
+        <section class="dashboard-section stagger-1">
+          <header class="section-header">
+            <h2>TASTE & STAY <span class="sub-title">맛과 머묾</span></h2>
+            <a href="/taste" class="view-all">전체보기 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+          </header>
+          <div class="feature-cards">
+            {latestTaste.map((entry, i) => (
+              <a href={`/taste/${entry.slug}`} class="feature-card glass" style={`animation-delay: ${0.5 + i * 0.1}s;`}>
+                <div class={`card-bg ${entry.data.coverImage ? '' : 'taste-bg-fallback'}`} style={entry.data.coverImage ? `background-image: url(${entry.data.coverImage});` : ''}></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    {entry.data.location && <span class="badge badge-location"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> {entry.data.location}</span>}
+                    {entry.data.rating && <span class="badge badge-rating">★ {entry.data.rating}</span>}
+                  </div>
+                  <div class="card-bottom">
+                    <time>{entry.data.date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\.$/, '')}</time>
+                    <h3>{entry.data.title}</h3>
+                    <p>{entry.data.description}</p>
+                  </div>
+                </div>
+              </a>
+            ))}
+            {latestTaste.length === 0 && <div class="empty-state glass"><p>아직 기록이 없습니다.</p></div>}
+          </div>
+        </section>
+
+        <!-- Latest Screen -->
+        <section class="dashboard-section stagger-2">
+          <header class="section-header">
+            <h2>SCREEN <span class="sub-title">스크린</span></h2>
+            <a href="/screen" class="view-all">전체보기 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+          </header>
+          <div class="feature-cards">
+            {latestScreen.map((entry, i) => (
+              <a href={`/screen/${entry.slug}`} class="feature-card glass" style={`animation-delay: ${0.7 + i * 0.1}s;`}>
+                <div class="card-bg screen-bg-fallback"></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    {entry.data.genre && <span class="badge badge-genre">{entry.data.genre}</span>}
+                    {entry.data.rating && <span class="badge badge-rating">★ {entry.data.rating}</span>}
+                  </div>
+                  <div class="card-bottom">
+                    <time>{entry.data.date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\.$/, '')}</time>
+                    <h3>{entry.data.title}</h3>
+                    <p>{entry.data.description}</p>
+                  </div>
+                </div>
+              </a>
+            ))}
+            {latestScreen.length === 0 && <div class="empty-state glass"><p>아직 기록이 없습니다.</p></div>}
+          </div>
+        </section>
+
+      </div>
+
+      <!-- Side Column (Thoughts) -->
+      <aside class="side-column stagger-3">
+        <section class="dashboard-section thoughts-section">
+          <header class="section-header">
+            <h2>THOUGHTS <span class="sub-title">단상</span></h2>
+            <a href="/thoughts" class="view-all">전체보기 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+          </header>
+          <div class="thoughts-feed">
+            {latestThoughts.map((entry, index) => (
+              <a href={`/thoughts/${entry.slug}`} class="thought-item glass" style={`animation-delay: ${0.8 + index * 0.1}s;`}>
+                <div class="thought-line"></div>
+                <time>{entry.data.date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\.$/, '')}</time>
+                <h4>{entry.data.title}</h4>
+                <p>{entry.data.description}</p>
+              </a>
+            ))}
+            {latestThoughts.length === 0 && <div class="empty-state glass"><p>아직 기록이 없습니다.</p></div>}
+          </div>
+        </section>
+      </aside>
+
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  /* --- Dynamic Background Orbs --- */
+  .bg-orbs {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -2;
+    overflow: hidden;
+    pointer-events: none;
+    background-color: #fafdfb;
+  }
+
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.5;
+    animation: float 20s infinite ease-in-out alternate;
+  }
+
+  .orb-1 {
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(5,150,105,0.15) 0%, rgba(5,150,105,0) 70%);
+    top: -10%;
+    left: -10%;
+    animation-delay: 0s;
+  }
+
+  .orb-2 {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(16,185,129,0.1) 0%, rgba(16,185,129,0) 70%);
+    bottom: -10%;
+    right: -10%;
+    animation-delay: -5s;
+    animation-duration: 25s;
+  }
+
+  .orb-3 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(52,211,153,0.1) 0%, rgba(52,211,153,0) 70%);
+    top: 40%;
+    left: 40%;
+    animation-delay: -10s;
+    animation-duration: 30s;
+  }
+
+  @keyframes float {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(100px, 50px) scale(1.2); }
+  }
+
+  /* --- Global Dashboard Spacing --- */
+  main {
+    padding-bottom: var(--spacing-xxl);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* --- Hero Section --- */
+  .hero {
+    padding-top: 10rem;
+    padding-bottom: 5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--spacing-xxl);
+  }
+
+  .hero-content {
+    flex: 1.2;
+    z-index: 2;
+  }
+
+  .slogan {
+    font-size: 4.5rem;
+    line-height: 1.15;
+    letter-spacing: -0.04em;
+    font-weight: 200;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-lg);
+    opacity: 0;
+    animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .slogan .highlight {
+    font-weight: 700;
+    color: transparent;
+    background: linear-gradient(90deg, #059669 0%, #10b981 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    position: relative;
+    display: inline-block;
+  }
+  
+  .slogan .highlight::after {
+    content: '';
+    position: absolute;
+    bottom: 10px;
+    left: -2%;
+    width: 104%;
+    height: 16px;
+    background-color: rgba(16, 185, 129, 0.2);
+    z-index: -1;
+    border-radius: 4px;
+    transform: rotate(-1.5deg);
+    backdrop-filter: blur(2px);
+  }
+
+  .intro-text {
+    font-size: 1.25rem;
+    color: var(--color-text-muted);
+    font-weight: 400;
+    line-height: 1.8;
+    letter-spacing: -0.02em;
+    max-width: 480px;
+    margin-bottom: var(--spacing-xl);
+    opacity: 0;
+    animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.2s;
+  }
+
+  /* --- Currently Watching Badge (Netflix Inspired) --- */
+  .watching-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: #18181b; /* Netflix deep dark */
+    color: #f4f4f5;
+    padding: 10px 20px 10px 16px;
+    border-radius: 9999px; /* Pill shape */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255,255,255,0.05);
+    text-decoration: none;
+    opacity: 0;
+    animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.4s;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    border: 1px solid rgba(229, 9, 20, 0.2);
+  }
+
+  .watching-badge:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 25px rgba(229, 9, 20, 0.15), 0 0 0 1px rgba(255,255,255,0.1);
+    background: #27272a;
+    border-color: rgba(229, 9, 20, 0.4);
+  }
+
+  .watching-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #E50914; /* Netflix Red */
+    box-shadow: 0 0 10px rgba(229, 9, 20, 0.8), 0 0 4px rgba(229, 9, 20, 0.6);
+    animation: pulse-red 2s infinite cubic-bezier(0.66, 0, 0, 1);
+  }
+
+  @keyframes pulse-red {
+    0% {
+      box-shadow: 0 0 0 0 rgba(229, 9, 20, 0.7);
+    }
+    70% {
+      box-shadow: 0 0 0 10px rgba(229, 9, 20, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(229, 9, 20, 0);
+    }
+  }
+
+  .watching-label {
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: #a1a1aa;
+  }
+
+  .watching-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+  }
+
+  .hero-visual {
+    flex: 0.8;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    opacity: 0;
+    animation: fadeIn 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.5s;
+  }
+
+  .shape {
+    width: 320px;
+    height: 320px;
+    background: linear-gradient(135deg, rgba(5,150,105,0.2) 0%, rgba(255,255,255,0.1) 100%);
+    backdrop-filter: blur(10px);
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    position: relative;
+    animation: morph 12s ease-in-out infinite both alternate;
+    border: 2px solid rgba(255,255,255,0.8);
+    box-shadow: 
+      inset 0 0 40px rgba(255,255,255,0.8),
+      0 20px 40px rgba(5,150,105,0.1);
+  }
+
+  .shape-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120%;
+    height: 120%;
+    background: radial-gradient(circle, rgba(16,185,129,0.3) 0%, rgba(255,255,255,0) 70%);
+    z-index: -1;
+    pointer-events: none;
+    animation: pulse 4s ease-in-out infinite alternate;
+  }
+
+  @keyframes pulse {
+    0% { transform: translate(-50%, -50%) scale(0.95); opacity: 0.7; }
+    100% { transform: translate(-50%, -50%) scale(1.05); opacity: 1; }
+  }
+
+  @keyframes morph {
+    0% { border-radius: 40% 60% 70% 30% / 40% 40% 60% 50%; }
+    34% { border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%; }
+    67% { border-radius: 100% 60% 60% 100% / 100% 100% 60% 60%; }
+    100% { border-radius: 40% 60% 70% 30% / 40% 40% 60% 50%; }
+  }
+
+
+  /* --- Dashboard Layout --- */
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: 1.8fr 1fr;
+    gap: var(--spacing-xxl);
+    margin-top: var(--spacing-md);
+  }
+
+  .main-column {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xxl);
+  }
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+    border-bottom: 2px solid rgba(0,0,0,0.05);
+    padding-bottom: var(--spacing-sm);
+    gap: 16px;
+  }
+
+  .stagger-1 { opacity: 0; animation: fadeInUp 0.8s forwards 0.4s; }
+  .stagger-2 { opacity: 0; animation: fadeInUp 0.8s forwards 0.6s; }
+  .stagger-3 { opacity: 0; animation: fadeInUp 0.8s forwards 0.8s; }
+
+  .section-header h2 {
+    margin: 0;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--color-text);
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    letter-spacing: -0.02em;
+    flex-wrap: wrap;
+  }
+
+  .section-header span.sub-title {
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: var(--color-text-muted);
+    white-space: nowrap;
+  }
+
+  .view-all {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    padding: 6px 14px;
+    border-radius: 20px;
+    background: rgba(5, 150, 105, 0.05);
+    border: 1px solid rgba(5, 150, 105, 0.1);
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .view-all svg {
+    transition: transform 0.3s ease;
+  }
+
+  .view-all:hover {
+    background: var(--color-accent);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(5, 150, 105, 0.2);
+    border-color: var(--color-accent);
+  }
+
+  .view-all:hover svg {
+    transform: translateX(3px);
+  }
+
+  /* --- Premium Glassmorphism --- */
+  .glass {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    box-shadow: 
+      0 10px 30px -10px rgba(0, 0, 0, 0.05),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+  }
+
+  /* --- Feature Cards (Taste & Screen) --- */
+  .feature-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-lg);
+    width: 100%;
+  }
+
+  .feature-card {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    aspect-ratio: 4 / 3.2;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity: 0;
+    animation: fadeInUp 0.8s forwards;
+    min-width: 0; /* Important for flex-child text truncation */
+  }
+
+  .feature-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 
+      0 30px 60px -15px rgba(5, 150, 105, 0.15),
+      0 0 0 2px rgba(16, 185, 129, 0.3),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.85);
+  }
+
+  .card-bg {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* High-end CSS Pattern Fallbacks */
+  .taste-bg-fallback {
+    background: 
+      radial-gradient(circle at top right, rgba(5,150,105,0.1), transparent 40%),
+      radial-gradient(circle at bottom left, rgba(245,158,11,0.05), transparent 40%),
+      linear-gradient(135deg, #f8fafc 0%, #f0fdf4 100%);
+  }
+
+  .screen-bg-fallback {
+    background: 
+      repeating-linear-gradient(45deg, rgba(16,185,129,0.02) 0px, rgba(16,185,129,0.02) 2px, transparent 2px, transparent 10px),
+      linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+  }
+
+  .feature-card:hover .card-bg {
+    transform: scale(1.08);
+  }
+
+  .card-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    padding: var(--spacing-xl);
+    background: linear-gradient(to bottom, rgba(255,255,255,0.0) 0%, rgba(255,255,255,0.95) 60%, rgba(255,255,255,1) 100%);
+    transition: background 0.5s ease;
+  }
+
+  .feature-card:hover .card-content {
+    background: linear-gradient(to bottom, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.98) 50%, rgba(255,255,255,1) 100%);
+  }
+
+  .card-top {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    transform: translateY(0);
+    transition: transform 0.4s ease;
+  }
+
+  .feature-card:hover .card-top {
+    transform: translateY(-5px);
+  }
+
+  .badge {
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,1);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    color: var(--color-text);
+  }
+
+  .badge-rating { color: var(--color-accent); }
+  .badge-genre, .badge-location { color: var(--color-text-muted); }
+
+  .card-bottom {
+    margin-top: auto;
+    transform: translateY(0);
+    transition: transform 0.4s ease;
+  }
+  
+  .feature-card:hover .card-bottom {
+    transform: translateY(-5px);
+  }
+
+  .card-bottom time {
+    font-size: 0.9rem;
+    color: var(--color-accent);
+    font-weight: 700;
+    margin-bottom: 6px;
+    display: block;
+    letter-spacing: 0.05em;
+  }
+
+  .card-bottom h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 10px;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .card-bottom p {
+    font-size: 1rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* --- Side Column (Thoughts Feed) --- */
+  .thoughts-feed {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+  }
+
+  .thought-item {
+    display: block;
+    padding: var(--spacing-xl);
+    border-radius: 16px;
+    position: relative;
+    border: 1px solid rgba(255,255,255,0.8);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity: 0;
+    animation: fadeInRight 0.6s forwards;
+    background: rgba(255, 255, 255, 0.65);
+  }
+
+  .thought-item::before {
+    content: '';
+    position: absolute;
+    left: -1px;
+    top: 50%;
+    transform: translateY(-50%) scaleY(0.3);
+    width: 4px;
+    height: 60%;
+    background-color: var(--color-accent);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    border-radius: 4px;
+    opacity: 0.5;
+  }
+
+  .thought-item:hover {
+    transform: translateX(8px);
+    background: rgba(255, 255, 255, 0.95);
+    border-color: rgba(16, 185, 129, 0.2);
+    box-shadow: 
+      0 15px 35px rgba(5, 150, 105, 0.08),
+      0 5px 15px rgba(0, 0, 0, 0.03);
+  }
+
+  .thought-item:hover::before {
+    transform: translateY(-50%) scaleY(1);
+    opacity: 1;
+    width: 6px;
+  }
+
+  .thought-item time {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: block;
+    letter-spacing: 0.05em;
+  }
+
+  .thought-item h4 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 8px;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+  }
+
+  .thought-item p {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .empty-state {
+    padding: var(--spacing-xl);
+    text-align: center;
+    border-radius: 16px;
+    border: 2px dashed rgba(0,0,0,0.1);
+    color: var(--color-text-muted);
+    font-weight: 500;
+  }
+
+  /* --- Animations --- */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeInRight {
+    from { opacity: 0; transform: translateX(30px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* --- Responsive --- */
+  @media (max-width: 900px) {
+    .dashboard-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      flex-direction: column;
+      text-align: center;
+      padding-top: 8rem;
+      padding-bottom: 4rem;
+      gap: var(--spacing-lg);
+    }
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .slogan { font-size: 3.2rem; }
+    .hero-visual { justify-content: center; }
+    .shape { width: 240px; height: 240px; }
+  }
+</style>
