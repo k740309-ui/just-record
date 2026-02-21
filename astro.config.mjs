@@ -5,6 +5,8 @@ import react from '@astrojs/react';
 import keystatic from '@keystatic/astro';
 import markdoc from '@astrojs/markdoc';
 
+import netlify from '@astrojs/netlify';
+
 // https://astro.build/config
 export default defineConfig({
   integrations: [
@@ -13,5 +15,7 @@ export default defineConfig({
     mdx(),
     markdoc() // Required by Keystatic internal UI occasionally
   ],
+
   output: 'static',
+  adapter: netlify(),
 });
