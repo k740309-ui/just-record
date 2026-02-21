@@ -115,8 +115,33 @@ const currentPath = Astro.url.pathname;
   }
 
   @media (max-width: 640px) {
+    .nav-container {
+      padding: 0 var(--spacing-sm);
+    }
+    .logo {
+      display: none; /* Hide logo on small screens to make room for all 5 nav links */
+    }
     .nav-links {
-      gap: var(--spacing-md);
+      width: 100%;
+      justify-content: space-between;
+      gap: 0;
+    }
+    .main-text {
+      font-size: 0.8rem;
+    }
+    .sub-text {
+      font-size: 0.6rem;
+      margin-top: 1px;
+    }
+    .nav-item {
+      padding-bottom: 4px;
+    }
+  }
+
+  @media (max-width: 400px) {
+    /* For extremely narrow phones, hide sub-text to prevent breaking lines */
+    .sub-text {
+      display: none;
     }
   }
 </style>
