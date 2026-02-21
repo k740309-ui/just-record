@@ -51,88 +51,81 @@ const watchingScreen = allScreen
       </div>
     </section>
 
-    <!-- Dashboard Layout -->
-    <div class="dashboard-grid">
+    <!-- 3-Row Stacked Layout -->
+    <div class="stacked-layout">
       
-      <!-- Main Content Column (Taste & Screen) -->
-      <div class="main-column">
-        
-        <!-- Latest Taste & Stay -->
-        <section class="dashboard-section stagger-1">
-          <header class="section-header">
-            <h2>TASTE & STAY <span class="sub-title">맛과 머묾</span></h2>
-            <a href="/taste" class="view-all">전체보기 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-          </header>
-          <div class="feature-cards">
-            {latestTaste.map((entry, i) => (
-              <a href={`/taste/${entry.slug}`} class="feature-card glass" style={`animation-delay: ${0.5 + i * 0.1}s;`}>
-                <div class={`card-bg ${entry.data.coverImage ? '' : 'taste-bg-fallback'}`} style={entry.data.coverImage ? `background-image: url(${entry.data.coverImage});` : ''}></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    {entry.data.location && <span class="badge badge-location"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> {entry.data.location}</span>}
-                    {entry.data.rating && <span class="badge badge-rating">★ {entry.data.rating}</span>}
-                  </div>
-                  <div class="card-bottom">
-                    <time>{entry.data.date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\.$/, '')}</time>
-                    <h3>{entry.data.title}</h3>
-                    <p>{entry.data.description}</p>
-                  </div>
+      <!-- 1. Latest Taste & Stay -->
+      <section class="dashboard-section stagger-1">
+        <header class="section-header">
+          <h2>TASTE & STAY <span class="sub-title">맛과 머묾</span></h2>
+          <a href="/taste" class="view-all">전체보기 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+        </header>
+        <div class="feature-cards">
+          {latestTaste.map((entry, i) => (
+            <a href={`/taste/${entry.slug}`} class="feature-card glass" style={`animation-delay: ${0.5 + i * 0.1}s;`}>
+              <div class={`card-bg ${entry.data.coverImage ? '' : 'taste-bg-fallback'}`} style={entry.data.coverImage ? `background-image: url(${entry.data.coverImage});` : ''}></div>
+              <div class="card-content">
+                <div class="card-top">
+                  {entry.data.location && <span class="badge badge-location"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> {entry.data.location}</span>}
+                  {entry.data.rating && <span class="badge badge-rating">★ {entry.data.rating}</span>}
                 </div>
-              </a>
-            ))}
-            {latestTaste.length === 0 && <div class="empty-state glass"><p>아직 기록이 없습니다.</p></div>}
-          </div>
-        </section>
-
-        <!-- Latest Screen -->
-        <section class="dashboard-section stagger-2">
-          <header class="section-header">
-            <h2>SCREEN <span class="sub-title">스크린</span></h2>
-            <a href="/screen" class="view-all">전체보기 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-          </header>
-          <div class="feature-cards">
-            {latestScreen.map((entry, i) => (
-              <a href={`/screen/${entry.slug}`} class="feature-card glass" style={`animation-delay: ${0.7 + i * 0.1}s;`}>
-                <div class="card-bg screen-bg-fallback"></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    {entry.data.genre && <span class="badge badge-genre">{entry.data.genre}</span>}
-                    {entry.data.rating && <span class="badge badge-rating">★ {entry.data.rating}</span>}
-                  </div>
-                  <div class="card-bottom">
-                    <time>{entry.data.date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\.$/, '')}</time>
-                    <h3>{entry.data.title}</h3>
-                    <p>{entry.data.description}</p>
-                  </div>
+                <div class="card-bottom">
+                  <time>{entry.data.date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\.$/, '')}</time>
+                  <h3>{entry.data.title}</h3>
+                  <p>{entry.data.description}</p>
                 </div>
-              </a>
-            ))}
-            {latestScreen.length === 0 && <div class="empty-state glass"><p>아직 기록이 없습니다.</p></div>}
-          </div>
-        </section>
+              </div>
+            </a>
+          ))}
+          {latestTaste.length === 0 && <div class="empty-state glass"><p>아직 기록이 없습니다.</p></div>}
+        </div>
+      </section>
 
-      </div>
+      <!-- 2. Latest Screen -->
+      <section class="dashboard-section stagger-2">
+        <header class="section-header">
+          <h2>SCREEN <span class="sub-title">스크린</span></h2>
+          <a href="/screen" class="view-all">전체보기 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+        </header>
+        <div class="feature-cards">
+          {latestScreen.map((entry, i) => (
+            <a href={`/screen/${entry.slug}`} class="feature-card glass" style={`animation-delay: ${0.7 + i * 0.1}s;`}>
+              <div class="card-bg screen-bg-fallback"></div>
+              <div class="card-content">
+                <div class="card-top">
+                  {entry.data.genre && <span class="badge badge-genre">{entry.data.genre}</span>}
+                  {entry.data.rating && <span class="badge badge-rating">★ {entry.data.rating}</span>}
+                </div>
+                <div class="card-bottom">
+                  <time>{entry.data.date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\.$/, '')}</time>
+                  <h3>{entry.data.title}</h3>
+                  <p>{entry.data.description}</p>
+                </div>
+              </div>
+            </a>
+          ))}
+          {latestScreen.length === 0 && <div class="empty-state glass"><p>아직 기록이 없습니다.</p></div>}
+        </div>
+      </section>
 
-      <!-- Side Column (Thoughts) -->
-      <aside class="side-column stagger-3">
-        <section class="dashboard-section thoughts-section">
-          <header class="section-header">
-            <h2>THOUGHTS <span class="sub-title">단상</span></h2>
-            <a href="/thoughts" class="view-all">전체보기 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-          </header>
-          <div class="thoughts-feed">
-            {latestThoughts.map((entry, index) => (
-              <a href={`/thoughts/${entry.slug}`} class="thought-item glass" style={`animation-delay: ${0.8 + index * 0.1}s;`}>
-                <div class="thought-line"></div>
-                <time>{entry.data.date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\.$/, '')}</time>
-                <h4>{entry.data.title}</h4>
-                <p>{entry.data.description}</p>
-              </a>
-            ))}
-            {latestThoughts.length === 0 && <div class="empty-state glass"><p>아직 기록이 없습니다.</p></div>}
-          </div>
-        </section>
-      </aside>
+      <!-- 3. Latest Thoughts -->
+      <section class="dashboard-section stagger-3 thoughts-section">
+        <header class="section-header">
+          <h2>THOUGHTS <span class="sub-title">단상</span></h2>
+          <a href="/thoughts" class="view-all">전체보기 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+        </header>
+        <div class="feature-cards thoughts-cards">
+          {latestThoughts.map((entry, index) => (
+            <a href={`/thoughts/${entry.slug}`} class="thought-item glass" style={`animation-delay: ${0.8 + index * 0.1}s;`}>
+              <div class="thought-line"></div>
+              <time>{entry.data.date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\.$/, '')}</time>
+              <h4>{entry.data.title}</h4>
+              <p>{entry.data.description}</p>
+            </a>
+          ))}
+          {latestThoughts.length === 0 && <div class="empty-state glass"><p>아직 기록이 없습니다.</p></div>}
+        </div>
+      </section>
 
     </div>
   </main>
@@ -372,18 +365,13 @@ const watchingScreen = allScreen
   }
 
 
-  /* --- Dashboard Layout --- */
-  .dashboard-grid {
-    display: grid;
-    grid-template-columns: 1.8fr 1fr;
-    gap: var(--spacing-xxl);
-    margin-top: var(--spacing-md);
-  }
-
-  .main-column {
+  /* --- Stacked Layout --- */
+  .stacked-layout {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-xxl);
+    gap: var(--spacing-xxxl); /* Lots of breathing room between sections */
+    margin-top: var(--spacing-xl);
+    width: 100%;
   }
 
   .section-header {
@@ -463,11 +451,19 @@ const watchingScreen = allScreen
   }
 
   /* --- Feature Cards (Taste & Screen) --- */
+  /* --- Feature Cards (Taste, Screen, Thoughts) --- */
   .feature-cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: var(--spacing-lg);
     width: 100%;
+  }
+
+  @media (min-width: 1200px) {
+    .feature-cards {
+      /* Display 3-4 cards beautifully on wide screens */
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    }
   }
 
   .feature-card {
@@ -606,23 +602,27 @@ const watchingScreen = allScreen
     overflow: hidden;
   }
 
-  /* --- Side Column (Thoughts Feed) --- */
-  .thoughts-feed {
-    display: flex;
-    flex-direction: column;
+  /* --- Thoughts Specific Feed --- */
+  /* Remove list constraint, map to feature card grid logic */
+  .thoughts-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: var(--spacing-lg);
   }
 
   .thought-item {
-    display: block;
+    display: flex;
+    flex-direction: column;
     padding: var(--spacing-xl);
-    border-radius: 16px;
+    border-radius: 20px;
     position: relative;
     border: 1px solid rgba(255,255,255,0.8);
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     opacity: 0;
-    animation: fadeInRight 0.6s forwards;
+    animation: fadeInUp 0.8s forwards;
     background: rgba(255, 255, 255, 0.65);
+    height: 100%;
+    min-height: 200px;
   }
 
   .thought-item::before {
@@ -640,7 +640,7 @@ const watchingScreen = allScreen
   }
 
   .thought-item:hover {
-    transform: translateX(8px);
+    transform: translateY(-5px);
     background: rgba(255, 255, 255, 0.95);
     border-color: rgba(16, 185, 129, 0.2);
     box-shadow: 
@@ -709,9 +709,7 @@ const watchingScreen = allScreen
 
   /* --- Responsive --- */
   @media (max-width: 900px) {
-    .dashboard-grid {
-      grid-template-columns: 1fr;
-    }
+    /* Kept for potential sub-grid adjustments if needed, though stacked handles mobile beautifully */
   }
 
   @media (max-width: 768px) {

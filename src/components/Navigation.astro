@@ -21,6 +21,10 @@ const currentPath = Astro.url.pathname;
         <span class="main-text">THOUGHTS</span>
         <span class="sub-text">단상</span>
       </a>
+      <a href="/about" class={`nav-item ${currentPath === '/about' ? 'active' : ''}`}>
+        <span class="main-text">ABOUT</span>
+        <span class="sub-text">소개</span>
+      </a>
     </div>
   </div>
 </nav>
