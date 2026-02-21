@@ -16,6 +16,6 @@ export default defineConfig({
     markdoc() // Required by Keystatic internal UI occasionally
   ],
 
-  output: 'static',
+  output: 'server',
   adapter: netlify(),
 });
