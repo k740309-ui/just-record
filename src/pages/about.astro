@@ -34,7 +34,7 @@ import Footer from '../components/Footer.astro';
     </header>
 
     <!-- My Favorites Section -->
-    <section class="favorites stagger-3">
+    <section class="favorites">
       <h2>My Favorites</h2>
       <div class="favorites-grid bento-grid">
         
@@ -175,16 +175,10 @@ import Footer from '../components/Footer.astro';
     z-index: 1;
   }
 
-  .stagger-1 { opacity: 0; animation: fadeInUp 0.8s ease forwards; animation-delay: 0.2s; }
-  .stagger-2 { opacity: 0; animation: fadeInUp 0.8s ease forwards; animation-delay: 0.4s; }
-  .stagger-3 { opacity: 0; animation: fadeInUp 0.8s ease forwards; animation-delay: 0.6s; }
-  .stagger-4 { opacity: 0; animation: fadeInUp 0.8s ease forwards; animation-delay: 0.8s; }
-
   .about-header {
     margin-top: var(--spacing-xxl);
     padding-bottom: var(--spacing-xxl);
     border-bottom: 2px dashed rgba(0,0,0,0.1);
-    animation: fadeInUp 0.8s ease forwards;
   }
 
   .about-header-content {
@@ -492,8 +486,6 @@ import Footer from '../components/Footer.astro';
     border-top: 2px dashed rgba(0,0,0,0.1);
     position: relative;
     z-index: 1;
-    animation: fadeInUp 1s ease forwards;
-    animation-delay: 0.8s;
   }
 
   blockquote {
