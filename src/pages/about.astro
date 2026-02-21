@@ -7,16 +7,23 @@ import Footer from '../components/Footer.astro';
   <main class="container">
     <!-- Header Section -->
     <header class="about-header">
-      <h1>1974년 서울에서 태어나,<br/><span class="highlight">차곡차곡 쌓아온 시간의 질감을 기록하는</span><br/>50대 기록가</h1>
-      <ul class="about-timeline">
-        <li><span>초등학교</span>대길초등학교</li>
-        <li><span>중학교</span>윤중중학교</li>
-        <li><span>고등학교</span>영신고등학교</li>
-        <li><span>대학교</span>아주대학교 경영학과</li>
-      </ul>
-      <p class="about-intro">
-        나이는 단순한 숫자에 불과합니다. 지나온 시간만큼 깊어진 시선으로 매일 새로운 퀘스트를 수행하듯 일상을 즐깁니다.
-      </p>
+      <div class="about-header-content">
+        <div class="profile-photo-wrapper">
+          <img src="/images/about/profile_portrait.jpg" alt="Profile Portrait" class="profile-photo" />
+        </div>
+        <div class="about-text-content">
+          <h1>1974년 서울에서 태어나,<br/><span class="highlight">차곡차곡 쌓아온 시간의 질감을 기록하는</span><br/>50대 기록가</h1>
+          <ul class="about-timeline">
+            <li><span>초등학교</span>대길초등학교</li>
+            <li><span>중학교</span>윤중중학교</li>
+            <li><span>고등학교</span>영신고등학교</li>
+            <li><span>대학교</span>아주대학교 경영학과</li>
+          </ul>
+          <p class="about-intro">
+            나이는 단순한 숫자에 불과합니다. 지나온 시간만큼 깊어진 시선으로 매일 새로운 퀘스트를 수행하듯 일상을 즐깁니다.
+          </p>
+        </div>
+      </div>
     </header>
 
     <!-- My Favorites Section -->
@@ -109,10 +116,53 @@ import Footer from '../components/Footer.astro';
 
   .about-header {
     margin-top: var(--spacing-xxl);
-    padding-bottom: var(--spacing-xl);
+    padding-bottom: var(--spacing-xxl);
     border-bottom: 2px solid var(--color-border);
     animation: fadeIn 0.8s ease forwards;
-    text-align: center;
+  }
+
+  .about-header-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-xl);
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  @media (min-width: 768px) {
+    .about-header-content {
+      flex-direction: row;
+      align-items: flex-start;
+      text-align: left;
+    }
+  }
+
+  .profile-photo-wrapper {
+    flex-shrink: 0;
+    width: 200px;
+    height: 250px;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 3px solid var(--color-border);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transform: rotate(-2deg);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+
+  .profile-photo-wrapper:hover {
+    transform: rotate(0deg) scale(1.02);
+    border-color: var(--color-accent);
+  }
+
+  .profile-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .about-text-content {
+    flex-grow: 1;
   }
 
   h1 {
@@ -134,8 +184,6 @@ import Footer from '../components/Footer.astro';
     color: var(--color-text-muted);
     font-weight: 400;
     line-height: 1.8;
-    max-width: 500px;
-    margin: 0 auto;
   }
 
   .about-timeline {
