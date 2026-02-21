@@ -111,19 +111,14 @@ const watchingScreen = allScreen
         </header>
         <div class="feature-cards">
           {latestScreen.map((entry, i) => (
-            <a href={`/screen/${entry.slug}`} class="feature-card glass" style={`animation-delay: ${0.7 + i * 0.1}s;`}>
-              <div class="card-bg screen-bg-fallback"></div>
-              <div class="card-content">
-                <div class="card-top">
-                  {entry.data.genre && <span class="badge badge-genre">{entry.data.genre}</span>}
-                  {entry.data.rating && <span class="badge badge-rating">★ {entry.data.rating}</span>}
-                </div>
-                <div class="card-bottom">
-                  <time>{entry.data.date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\.$/, '')}</time>
-                  <h3>{entry.data.title}</h3>
-                  <p>{entry.data.description}</p>
-                </div>
+            <a href={`/screen/${entry.slug}`} class="screen-card glass" style={`animation-delay: ${0.7 + i * 0.1}s;`}>
+              <div class="card-top">
+                {entry.data.genre && <span class="badge badge-genre">{entry.data.genre}</span>}
+                {entry.data.rating && <span class="badge badge-rating">★ {entry.data.rating}</span>}
               </div>
+              <time>{entry.data.date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\.$/, '')}</time>
+              <h3>{entry.data.title}</h3>
+              <p>{entry.data.description}</p>
             </a>
           ))}
           {latestScreen.length === 0 && <div class="empty-state glass"><p>아직 기록이 없습니다.</p></div>}
@@ -562,7 +557,7 @@ const watchingScreen = allScreen
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    aspect-ratio: 4 / 3.2;
+    height: 340px;
     transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     opacity: 0;
     animation: fadeInUp 0.8s forwards;
@@ -705,6 +700,64 @@ const watchingScreen = allScreen
     line-height: 1.6;
     display: -webkit-box;
     -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* --- Screen Cards (Text Focused) --- */
+  .screen-card {
+    display: flex;
+    flex-direction: column;
+    padding: var(--spacing-xl);
+    border-radius: 20px;
+    position: relative;
+    border: 1px solid rgba(255,255,255,0.8);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity: 0;
+    animation: fadeInUp 0.8s forwards;
+    background: rgba(255, 255, 255, 0.7);
+  }
+
+  .screen-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.95);
+    border-color: rgba(16, 185, 129, 0.2);
+    box-shadow: 
+      0 15px 35px rgba(5, 150, 105, 0.08),
+      0 5px 15px rgba(0, 0, 0, 0.03);
+  }
+
+  .screen-card .card-top {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .screen-card time {
+    font-size: 0.85rem;
+    color: var(--color-accent);
+    font-weight: 700;
+    margin-bottom: 8px;
+    display: block;
+    letter-spacing: 0.05em;
+  }
+
+  .screen-card h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 10px;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+  }
+
+  .screen-card p {
+    font-size: 1rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
